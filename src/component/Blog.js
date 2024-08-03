@@ -108,16 +108,24 @@ const Blog = () => {
                 className="p-2 bg-white shadow-md rounded-lg overflow-hidden m-3 w-80 h-[26rem] relative"
               >
                 <div className="flex items-center border-b-2 border-gray-500 pb-2 mb-2">
-                  <img
-                    src={blog.owner.avatar} // Use avatar URL from blog.author
-                    alt="user avatar"
-                    className="w-12 h-12 border rounded-full"
-                  />
-                  <h1 className="font-bold text-2xl mx-2">
-                    {blog.owner.username}
-                  </h1>{" "}
-                  {/* Use username from blog.author */}
-                </div>
+  {blog.owner ? (
+    <>
+      <img
+        src={blog.owner.avatar} // Use avatar URL from blog.owner
+        alt="user avatar"
+        className="w-12 h-12 border rounded-full"
+      />
+      <h1 className="font-bold text-2xl mx-2">
+        {blog.owner.username}
+      </h1>{" "}
+    </>
+  ) : (
+    <h1 className="font-bold text-2xl mx-2">
+      Anonymous
+    </h1>
+  )}
+</div>
+
                 <div className="p-2 text-justify border-b-2 border-gray-400">
                   {blog.content}
                 </div>
