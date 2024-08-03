@@ -6,11 +6,11 @@ import Cookies from "js-cookie";
 const BlogAllComment = ({ blogId, onClose }) => {
   const [blog, setBlog] = useState(null);
   const [comments, setComments] = useState([]);
+  const token = Cookies.get('accessToken')
 
   useEffect(() => {
     // Fetch the blog by ID
     const fetchBlogById = async () => {
-      const token = Cookies.get('accessToken')
       try {
         const response = await axios.get(`${host}/blogs/${blogId}`, {
           headers: {
@@ -29,6 +29,9 @@ const BlogAllComment = ({ blogId, onClose }) => {
     const fetchBlogComments = async () => {
       try {
         const response = await axios.get(`${host}/comments/${blogId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           withCredentials: true,
         });
         setComments(response.data.data);
@@ -39,7 +42,7 @@ const BlogAllComment = ({ blogId, onClose }) => {
 
     fetchBlogById();
     fetchBlogComments();
-  }, [blogId]);
+  }, [blogId,token]);
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">

@@ -29,7 +29,7 @@ const Getuser = (props) => {
     };
 
     getUser();
-  }, []); // Add empty dependency array to run only once
+  }, [token]); // Add empty dependency array to run only once
 
   if (!user) {
     return <p>Loading...</p>; // Handle loading state

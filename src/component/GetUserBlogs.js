@@ -101,7 +101,7 @@ const GetUserBlogs = (props) => {
     };
 
     fetchUserBlog();
-  }, []);
+  }, [token]);
 
   const handleDeleteBlog = async (blogId) => {
     try {
