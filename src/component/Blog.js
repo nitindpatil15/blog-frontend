@@ -3,12 +3,14 @@ import "material-icons/iconfont/material-icons.css";
 import { host } from "../constant";
 import axios from "axios";
 import BlogAllComment from "./BlogAllComment";
+import Cookies from "js-cookie";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
   const [likedBlogs, setLikedBlogs] = useState({});
   const [newComment, setNewComment] = useState({});
   const [commentPopupBlogId, setCommentPopupBlogId] = useState(null); // State for comment popup
+  const token = Cookies.get('accessToken')
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
@@ -34,6 +36,9 @@ const Blog = () => {
         `${host}/likes/toggle/v/${blogId}`,
         {},
         {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           withCredentials: true,
         }
       );
@@ -65,6 +70,7 @@ const Blog = () => {
         {
           withCredentials: true,
           headers: {
+            'Authorization': `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
