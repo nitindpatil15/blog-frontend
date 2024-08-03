@@ -151,7 +151,7 @@ const Blog = () => {
                 <div className="p-2">
                   <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
                   <p className="font-medium text-gray-600">
-                    Author: {blog.owner.username} {/* Display username */}
+                    Author: {blog.owner?(blog.owner.username):("user")} {/* Display username */}
                   </p>
                   <div className="mt-4 flex items-center justify-center">
                     <input
