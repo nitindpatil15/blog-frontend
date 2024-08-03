@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { host } from "../constant";
+import Cookies from "js-cookie";
 
 const BlogAllComment = ({ blogId, onClose }) => {
   const [blog, setBlog] = useState(null);
@@ -9,8 +10,12 @@ const BlogAllComment = ({ blogId, onClose }) => {
   useEffect(() => {
     // Fetch the blog by ID
     const fetchBlogById = async () => {
+      const token = Cookies.get('accessToken')
       try {
         const response = await axios.get(`${host}/blogs/${blogId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           withCredentials: true,
         });
         console.log("fetchBlogById", response.data.data);

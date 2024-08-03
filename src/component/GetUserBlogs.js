@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UpdateBlog from "./UpdateBlog";
 import BlogAllComment from "./BlogAllComment";
+import Cookies from "js-cookie";
 
 const GetUserBlogs = (props) => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const GetUserBlogs = (props) => {
   const [newComment, setNewComment] = useState({});
   const [blogToUpdate, setBlogToUpdate] = useState(null); // State for the blog to update
   const [commentPopupBlogId, setCommentPopupBlogId] = useState(null); // State for comment popup
+  const token = Cookies.get("accessToken");
 
   const toggleDropdown = (blogId) => {
     setDropdownOpen((prev) => ({
@@ -27,6 +29,9 @@ const GetUserBlogs = (props) => {
         `${host}/likes/toggle/v/${blogId}`,
         {},
         {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           withCredentials: true,
         }
       );
@@ -58,6 +63,7 @@ const GetUserBlogs = (props) => {
         {
           withCredentials: true,
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -77,6 +83,9 @@ const GetUserBlogs = (props) => {
     const fetchUserBlog = async () => {
       try {
         const response = await axios.get(`${host}/blogs/user/blogs`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           withCredentials: true,
         });
         const blogsData = response.data.data; // Adjusted to directly set blogs array
@@ -97,6 +106,9 @@ const GetUserBlogs = (props) => {
   const handleDeleteBlog = async (blogId) => {
     try {
       const response = await axios.delete(`${host}/blogs/${blogId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         withCredentials: true,
       });
       alert("Blog deleted Successfully!!!");

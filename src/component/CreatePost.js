@@ -2,13 +2,15 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { host } from "../constant";
+import Cookies from "js-cookie";
 
 const CreatePost = () => {
-  // for Form 
+  // for Form
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
+  const token = Cookies.get('accessToken')
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ const CreatePost = () => {
       const response = await axios.post(`${host}/blogs/`, formData, {
         withCredentials: true,
         headers: {
+          'Authorization': `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });

@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { host } from "../constant";
+import Cookies from "js-cookie";
 
 const UpdateBlog = ({ blog, onClose, onUpdate }) => {
   const [title, setTitle] = useState(blog.title);
   const [content, setContent] = useState(blog.content);
   const [error, setError] = useState(null);
+  const token = Cookies.get("accessToken")
 
   const handleUpdate = async () => {
     try {
       const response = await axios.patch(
         `${host}/blogs/${blog._id}`,
         { title, content },
-        { withCredentials: true }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
       );
       onUpdate(response.data.data.blogUpdate);
       onClose();

@@ -3,8 +3,10 @@ import "material-icons/iconfont/material-icons.css";
 import axios from "axios";
 import { host } from "../constant";
 import GetUserBlogs from "./GetUserBlogs";
+import Cookies from "js-cookie";
 
 const Getuser = (props) => {
+  const token = Cookies.get('accessToken')
   const [user, setUser] = useState(null); // Initialize as null
 
   useEffect(() => {
@@ -13,7 +15,11 @@ const Getuser = (props) => {
         const response = await axios.post(
           `${host}/users/profile`,
           {},
-          { withCredentials: true }
+          { 
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+            withCredentials: true }
         );
         console.log(response.data);
         setUser(response.data.data); // Access data directly

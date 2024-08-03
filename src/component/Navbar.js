@@ -8,6 +8,7 @@ import { host } from "../constant";
 const Navbar = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const token = Cookies.get('accessToken')
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -15,7 +16,16 @@ const Navbar = () => {
 
   const handleonLogout = async () => {
     try {
-      await axios.post(`${host}/users/logout`, {}, { withCredentials: true });
+      await axios.post(
+        `${host}/users/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
       alert("Logged Out Successfully!!");
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
