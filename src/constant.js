@@ -1,0 +1,1 @@
+export const host = "https://blog-backend-yjs8.onrender.com/api/v1";

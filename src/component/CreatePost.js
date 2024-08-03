@@ -1,40 +1,40 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { host } from "../constant";
 
 const CreatePost = () => {
+  // for Form 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  // eslint-disable-next-line
-  const [author, setAuthor] = useState("");
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add logic here to handle form submission, e.g., sending a POST request to your backend
 
-    const newPost = {
-      title,
-      content,
-      imageUrl,
-      author,
-      date: new Date().toISOString(),
-    };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+
+    // Append the image if it's selected
+    if (image) {
+      formData.append("image", image);
+    }
 
     try {
-      // Example POST request
-      await fetch("/api/posts", {
-        method: "POST",
+      const response = await axios.post(`${host}/blogs/`, formData, {
+        withCredentials: true,
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify(newPost),
       });
-
-      // Redirect to the blog page or the newly created post
-      navigate("/blog");
+      console.log(response);
+      alert("Blog Created Successfully!");
+      navigate("/");
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error("Failed to publish blog:", error);
+      alert("Failed to create blog. Please try again.");
     }
   };
 
@@ -44,7 +44,10 @@ const CreatePost = () => {
         <h1 className="text-3xl font-bold mb-6">Create Your Blog</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="title"
+            >
               Title
             </label>
             <input
@@ -59,7 +62,10 @@ const CreatePost = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="content"
+            >
               Content
             </label>
             <textarea
@@ -73,16 +79,17 @@ const CreatePost = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imageUrl">
-              Image URL
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="image"
+            >
+              Image
             </label>
             <input
-              type="text"
-              id="imageUrl"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              type="file"
+              id="image"
+              onChange={(e) => setImage(e.target.files[0])}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter image URL (optional)"
             />
           </div>
 

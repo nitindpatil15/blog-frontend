@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "material-icons/iconfont/material-icons.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { host } from "../constant";
 
 const Signup = () => {
+  const navigate = useNavigate();
   // eslint-disable-next-line
   const [profilePic, setProfilePic] = useState(null);
   const [previewProfilePic, setPreviewProfilePic] = useState(null);
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    console.log(credentials);
   };
   const [credentials, setCredentials] = useState({
     fullName: "",
@@ -22,10 +24,32 @@ const Signup = () => {
     setPreviewProfilePic(URL.createObjectURL(event.target.files[0]));
   };
 
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("fullName", credentials.fullName);
+    formData.append("username", credentials.username);
+    formData.append("email", credentials.email);
+    formData.append("password", credentials.password);
+    formData.append("avatar", profilePic);
+
+    try {
+      const response = await axios.post(`${host}/users/register`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response.data);
+      navigate("/login");
+    } catch (error) {
+      console.log("Registration Failed");
+    }
+  };
+
   return (
     <div className="mt-24 mx-16">
       <div className="flex justify-around">
-        <form className="flex flex-col mx-4">
+        <form onSubmit={handleOnSubmit} className="flex flex-col mx-4">
           <div className="h-24">
             <div className="profile-pic flex flex-row-reverse justify-between">
               <label className="form__label" htmlFor="profilePic">
@@ -60,6 +84,7 @@ const Signup = () => {
               type="text"
               name="fullName"
               id="fullName"
+              value={credentials.fullName}
               onChange={onChange}
               placeholder="Enter Full Name"
               required
@@ -72,6 +97,7 @@ const Signup = () => {
               type="text"
               name="username"
               id="username"
+              value={credentials.username}
               onChange={onChange}
               placeholder="Username"
               required
@@ -82,6 +108,7 @@ const Signup = () => {
               type="email"
               name="email"
               id="email"
+              value={credentials.email}
               onChange={onChange}
               placeholder="Enter Your Email"
               required
@@ -94,6 +121,7 @@ const Signup = () => {
               type="password"
               name="password"
               id="password"
+              value={credentials.password}
               onChange={onChange}
               placeholder="Password"
               required
