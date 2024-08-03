@@ -114,7 +114,7 @@ const Blog = () => {
                     className="w-12 h-12 border rounded-full"
                   />
                   <h1 className="font-bold text-2xl mx-2">
-                    {blog.author.username}
+                    {blog.owner.username}
                   </h1>{" "}
                   {/* Use username from blog.author */}
                 </div>
