@@ -8,7 +8,7 @@ import { host } from "../constant";
 const Navbar = () => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const token = Cookies.get('accessToken')
+  const token = Cookies.get("accessToken");
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -42,20 +42,20 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 right-0 left-0 z-50 bg-black border-b-2 flex justify-between px-4 py-2 items-center shadow-md">
-        <div className="text-gray-400 md:ml-12 text-2xl flex items-center p-2">
-          <Link to="/" className="md:ml-14  font-bold">
+      <div className="fixed top-0 right-0 left-0 z-50 bg-black border-b-2 flex justify-between p-1 md:px-4 items-center shadow-md mx-2">
+        <div className="text-gray-400 md:ml-12 text-2xl flex items-center">
+          <Link to="/" className="font-bold">
             WriteStory
           </Link>
-          <Link to="/" className="ml-10 mt-1 text-lg">
+        </div>
+        <div className="flex items-center p-2 text-white">
+          <Link to="/" className="mx-4 font-semibold md:ml-10 mt-1 text-lg">
             Home
           </Link>
-        </div>
-        <div className="flex items-center p-2">
           <Link
             to="/blog/createblog"
-            className="material-icons mx-4 text-white"
-            style={{ fontSize: "2.5rem" }}
+            className="material-icons text-white mx-4"
+            style={{ fontSize: "2rem" }}
           >
             add_circle
           </Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
                   <img
                     src={avatarUrl}
                     alt="avatar"
-                    className="w-12 h-12 mr-5 font-semibold cursor-pointer text-white rounded-full border-2"
+                    className="w-8 h-8 font-semibold cursor-pointer text-white rounded-full border-2"
                     onClick={toggleDropdown}
                   />
                 ) : (

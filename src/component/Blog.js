@@ -10,7 +10,7 @@ const Blog = () => {
   const [likedBlogs, setLikedBlogs] = useState({});
   const [newComment, setNewComment] = useState({});
   const [commentPopupBlogId, setCommentPopupBlogId] = useState(null); // State for comment popup
-  const token = Cookies.get('accessToken')
+  const token = Cookies.get("accessToken");
 
   useEffect(() => {
     const fetchAllBlogs = async () => {
@@ -37,7 +37,7 @@ const Blog = () => {
         {},
         {
           headers: {
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           withCredentials: true,
         }
@@ -70,7 +70,7 @@ const Blog = () => {
         {
           withCredentials: true,
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -94,8 +94,8 @@ const Blog = () => {
 
   return (
     <div className="bg-black">
-      <div className="mt-28">
-        <h1 className="text-4xl font-bold text-center mb-8 text-indigo-200">
+      <div className="mt-24">
+        <h1 className="text-4xl font-bold text-center mb-4 text-indigo-200">
           Blogs
         </h1>
 
@@ -108,25 +108,25 @@ const Blog = () => {
                 className="p-2 bg-white shadow-md rounded-lg overflow-hidden m-3 w-80 h-[26rem] relative"
               >
                 <div className="flex items-center border-b-2 border-gray-500 pb-2 mb-2">
-  {blog.owner ? (
-    <>
-      <img
-        src={blog.owner.avatar} // Use avatar URL from blog.owner
-        alt="user avatar"
-        className="w-12 h-12 border rounded-full"
-      />
-      <h1 className="font-bold text-2xl mx-2">
-        {blog.owner.username}
-      </h1>{" "}
-    </>
-  ) : (
-    <h1 className="font-bold text-2xl mx-2">
-      Anonymous
-    </h1>
-  )}
-</div>
+                  {blog.owner ? (
+                    <>
+                      <div className="flex items-center justify-start">
+                        <img
+                          src={blog.owner.avatar} // Use avatar URL from blog.owner
+                          alt="user avatar"
+                          className="w-8 h-8 border rounded-full"
+                        />
+                        <h1 className="font-bold text-2xl mx-2">
+                          {blog.owner.username}
+                        </h1>{" "}
+                      </div>
+                    </>
+                  ) : (
+                    <h1 className="font-bold text-2xl mx-2">Anonymous</h1>
+                  )}
+                </div>
 
-                <div className="p-2 text-justify border-b-2 border-gray-400">
+                <div className="p-2 h-auto text-justify border-b-2 border-gray-400">
                   {blog.content}
                 </div>
 
@@ -151,7 +151,8 @@ const Blog = () => {
                 <div className="p-2">
                   <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
                   <p className="font-medium text-gray-600">
-                    Author: {blog.owner?(blog.owner.username):("user")} {/* Display username */}
+                    Author: {blog.owner ? blog.owner.username : "user"}{" "}
+                    {/* Display username */}
                   </p>
                   <div className="mt-4 flex items-center justify-center">
                     <input

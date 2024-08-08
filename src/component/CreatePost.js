@@ -42,7 +42,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="p-6 bg-black min-h-screen">
+    <div className="p-6 bg-black">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-6">Create Your Blog</h1>
         <form onSubmit={handleSubmit}>
