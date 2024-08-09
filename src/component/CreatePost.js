@@ -8,7 +8,6 @@ const CreatePost = () => {
   // for Form
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState(null);
   const navigate = useNavigate();
   const token = Cookies.get('accessToken')
 
@@ -19,10 +18,6 @@ const CreatePost = () => {
     formData.append("title", title);
     formData.append("content", content);
 
-    // Append the image if it's selected
-    if (image) {
-      formData.append("image", image);
-    }
 
     try {
       const response = await axios.post(`${host}/blogs/`, formData, {
@@ -44,7 +39,7 @@ const CreatePost = () => {
   return (
     <div className="p-6 bg-black">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold mb-6">Create Your Blog</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">Create Your Blog</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -79,21 +74,6 @@ const CreatePost = () => {
               placeholder="Write your post content here"
               required
             ></textarea>
-          </div>
-
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="image"
-            >
-              Image
-            </label>
-            <input
-              type="file"
-              id="image"
-              onChange={(e) => setImage(e.target.files[0])}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
           </div>
 
           <div className="flex items-center justify-between">

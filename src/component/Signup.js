@@ -47,16 +47,13 @@ const Signup = () => {
   };
 
   return (
-    <div className="mt-24 mx-16">
-      <div className="flex justify-around">
-        <form onSubmit={handleOnSubmit} className="flex flex-col mx-4">
-          <div className="h-24">
-            <div className="profile-pic flex flex-row-reverse justify-between">
-              <label className="form__label" htmlFor="profilePic">
-                Profile Picture
-              </label>
+    <div className="md:mt-24 mx-16">
+      <div className="flex justify-center">
+        <form onSubmit={handleOnSubmit} className="flex flex-col mx-4 w-72 md:w-auto">
+          <div className="md:h-24 h-32 flex justify-center items-center">
+            <div className="profile-pic flex flex-col-reverse md:flex-row-reverse justify-center">
               <input
-                className="text-white mt-6 mx-2"
+                className="text-white md:mt-6 mx-2"
                 type="file"
                 name="avatar"
                 id="profilePic"

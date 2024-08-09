@@ -39,11 +39,11 @@ const Getuser = (props) => {
     <div className="">
       <div className="text-white flex items-center justify-center my-10 mt-28 py-4 mx-6">
         <div className="flex items-center">
-          <div className="mx-6 mt-2 flex flex-col w-32">
+          <div className="md:mx-6 mt-2 flex flex-col w-24 md:w-32">
             <img
               src={user.avatar}
               alt="avatar"
-              className="w-42 md:w-32 h-32 border-2 rounded-full"
+              className="w-20 h-20 md:w-32 md:h-32 border-2 rounded-full"
             />
           </div>
           <div className="">

@@ -138,7 +138,7 @@ const GetUserBlogs = (props) => {
         return (
           <div
             key={blog._id}
-            className="p-2 bg-white shadow-md rounded-lg overflow-hidden m-3 w-80 h-[25rem] relative"
+            className="p-2 bg-white shadow-md rounded-lg overflow-hidden mx-6 m-3 w-80 h-[25rem] relative"
           >
             <div className="flex items-center border-b-2 border-gray-500 pb-2 mb-2">
               <img

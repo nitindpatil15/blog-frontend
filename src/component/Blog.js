@@ -116,13 +116,20 @@ const Blog = () => {
                           alt="user avatar"
                           className="w-8 h-8 border rounded-full"
                         />
-                        <h1 className="font-bold text-2xl mx-2">
+                        <h1 className="font-bold text-xl mx-2">
                           {blog.owner.username}
                         </h1>{" "}
                       </div>
                     </>
                   ) : (
-                    <h1 className="font-bold text-2xl mx-2">Anonymous</h1>
+                    <div className="flex items-center justify-start">
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK6gKGIDVaPqj5Aw47pZXCrzKxXrv98Ptm0A&s" // Use avatar URL from blog.owner
+                        alt="user avatar"
+                        className="w-8 h-8 border rounded-full"
+                      />
+                      <h1 className="font-bold text-xl mx-2">Anonymous</h1>
+                    </div>
                   )}
                 </div>
 

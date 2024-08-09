@@ -54,7 +54,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/blog/createblog"
-            className="material-icons text-white mx-4"
+            className="material-icons text-white mx-2"
             style={{ fontSize: "2rem" }}
           >
             add_circle
@@ -64,7 +64,7 @@ const Navbar = () => {
               <Link
                 to="/login"
                 style={{ fontSize: "2rem" }}
-                className="material-icons mr-5 font-semibold p-2 text-white rounded-full"
+                className="material-icons md:mr-5 font-semibold p-2 text-white rounded-full"
               >
                 account_circle
               </Link>

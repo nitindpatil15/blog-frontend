@@ -44,11 +44,16 @@ const Login = () => {
   };
 
   return (
-    <div className="mt-24">
+    <div className="mt-24 mx-8">
       <div className="flex justify-around">
         <form onSubmit={handleonLogin} method="post" className="w-96">
-          <div className="text-white text-4xl mb-2 text-center">
+          <div className="text-white hidden md:block text-4xl mb-2 text-center">
             <span className="material-icons" style={{ fontSize: "6rem" }}>
+              account_circle
+            </span>
+          </div>{" "}
+          <div className="text-white md:hidden text-4xl mb-2 text-center">
+            <span className="material-icons" style={{ fontSize: "4rem" }}>
               account_circle
             </span>
           </div>{" "}
